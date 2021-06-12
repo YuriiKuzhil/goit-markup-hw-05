@@ -14,8 +14,8 @@
   --section-text-background: rgba(47, 48, 58, 0.8);
   --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   --portfolio-overlay-background: rgba(33, 150, 243, 0.9);
+  --backdrop-background: rgba(0, 0, 0, 0.2);
 }
-
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
@@ -53,7 +53,6 @@ body {
   margin-left: auto;
   padding-left: 15px;
   padding-right: 15px;
-  outline: 1px solid tomato;
 }
 .section {
   padding-top: 94px;
@@ -354,12 +353,16 @@ body {
 .clients-list {
   display: flex;
 }
+.clients-list-item {
+  width: 170px;
+  height: 92px;
+}
 .clients-link-icons {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 170px;
-  height: 92px;
+  width: 100%;
+  height: 100%;
 
   border: 1px solid var(--icons-color);
   border-radius: 4px;
@@ -376,6 +379,67 @@ body {
 .clients-list-item:not(:last-child) {
   margin-right: 30px;
 }
+
+/* МОДАЛЬНОЕ ОКНО */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: var(--backdrop-background);
+
+  opacity: 1;
+  transform: scale(1);
+
+  transition: opacity 500ms var(--timing-function),
+    transform 500ms var(--timing-function);
+}
+.backdrop.is-hidden {
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  min-height: 581px;
+  min-width: 528px;
+  padding: 8px;
+
+  transform: translate(-50%, -50%) scale(1);
+
+  background-color: var(--primary-white-color);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+
+  transition: transform 500ms var(--timing-function);
+}
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(0.5);
+}
+
+.modal-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  margin-left: auto;
+
+  background-color: var(--primary-white-color);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+
 /* FOOTER */
 .footer-section {
   padding-top: 60px;
